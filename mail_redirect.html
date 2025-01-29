@@ -15,9 +15,8 @@
                 // Open Gmail app on iOS
                 window.location.href = gmailAppURL;
             } else if (/Android/.test(navigator.userAgent)) {
-                // Try to open Gmail app on Android
-                window.location.href = gmailIntentURL;
-                
+                // Try opening Gmail app using Intent
+                window.location.replace(gmailIntentURL);
                 // Fallback to Gmail web if intent fails
                 setTimeout(function() {
                     window.location.href = gmailWebURL;
