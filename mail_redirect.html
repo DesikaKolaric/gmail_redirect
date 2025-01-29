@@ -4,14 +4,27 @@
     <title>Open Gmail</title>
     <script>
         function openGmail() {
-            var email = "kmozren@gmail.com";
-            var subject = "Hello there :)";
-            var gmailAppURL = "googlegmail://co?to=" + email + "&subject=" + subject;
-            var gmailWebURL = "https://mail.google.com/mail/?view=cm&to=" + email + "&su=" + subject;
-
+            var email = "email@example.com";
+            var subject = "Hello";
+            var body = "This is a test.";
+            
+            var gmailAppURL = "googlegmail://co?to=" + email + "&subject=" + subject + "&body=" + body;
+            var gmailIntentURL = "intent://compose?to=" + email + "&subject=" + subject + "&body=" + body + "#Intent;scheme=mailto;package=com.google.android.gm;end;";
+            var gmailWebURL = "https://mail.google.com/mail/?view=cm&to=" + email + "&su=" + subject + "&body=" + body;
+            
             if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                // Open Gmail app on iOS
                 window.location.href = gmailAppURL;
+            } else if (/Android/.test(navigator.userAgent)) {
+                // Try to open Gmail app on Android
+                window.location.href = gmailIntentURL;
+                
+                // Fallback to Gmail web if intent fails
+                setTimeout(function() {
+                    window.location.href = gmailWebURL;
+                }, 1000);
             } else {
+                // Default to web Gmail
                 window.location.href = gmailWebURL;
             }
         }
