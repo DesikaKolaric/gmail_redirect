@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Open Gmail</title>
+    <script>
+        function openGmail() {
+            var email = "kmozren@gmail.com";
+            var subject = "Hello there :)";
+            var gmailAppURL = "googlegmail://co?to=" + email + "&subject=" + subject;
+            var gmailWebURL = "https://mail.google.com/mail/?view=cm&to=" + email + "&su=" + subject;
+
+            if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                window.location.href = gmailAppURL;
+            } else {
+                window.location.href = gmailWebURL;
+            }
+        }
+    </script>
+</head>
+<body onload="openGmail()">
+    <p>Redirecting to Gmail...</p>
+</body>
+</html>
