@@ -4,27 +4,25 @@
     <title>Open Gmail</title>
     <script>
         function openGmail() {
-            var email = "kmozren@gmail.com";
-            var subject = "Hello there :)";
-            
-            var gmailAppURL = "googlegmail://co?to=" + email + "&subject=" + subject;
-            var gmailIntentURL = "intent://compose?to=" + email + "&subject=" + subject + "#Intent;scheme=mailto;package=com.google.android.gm;end;";
-            var gmailWebURL = "https://mail.google.com/mail/?view=cm&to=" + email + "&su=" + subject;
-            
+            var email = "kmozren@gmail.com";  
+            var subject = "Hello";  
+            var body = "This is a test.";  
+
+            var gmailAppURL = "googlegmail://co?to=" + email + "&subject=" + subject + "&body=" + body;
+            var gmailIntentURL = "intent://compose?to=" + email + "&subject=" + subject + "&body=" + body + "#Intent;scheme=mailto;package=com.google.android.gm;action=android.intent.action.VIEW;end;";
+
             if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-                // Open Gmail app on iOS
+                // iOS opens Gmail app directly
                 window.location.href = gmailAppURL;
             } else if (/Android/.test(navigator.userAgent)) {
-                // Try opening Gmail app using Intent
-                window.location.replace(gmailIntentURL);
-                // Fallback to Gmail web if intent fails
-                //setTimeout(function() {
-                    //window.location.href = gmailWebURL;
-                //}, 1000);
-            //} else {
-                // Default to web Gmail
-                //window.location.href = gmailWebURL;
-            //}
+                // Force Gmail app via Android Intent
+                setTimeout(function() {
+                    window.location.href = gmailIntentURL;
+                }, 100);
+            } else {
+                // Fallback to web Gmail
+                window.location.href = "https://mail.google.com/mail/?view=cm&to=" + email + "&su=" + subject + "&body=" + body;
+            }
         }
     </script>
 </head>
